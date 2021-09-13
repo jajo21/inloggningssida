@@ -7,9 +7,8 @@ const username = document.querySelector("#username");
 const password = document.querySelector("#password");
 const logInBtn = document.querySelector("#logInBtn");
 
-
-/*  Om användaren redan har loggat in och inte loggat ut igen så går man automatiskt
-    till Välkomstsidan */  
+/*  Om användaren redan har loggat in och inte loggat ut igen så kommer man 
+    automatiskt till välkomstsidan */  
 function checkLogIn(user, passw) {
     if (localStorage.getItem(user) == passw) {
         logIn(true);
@@ -18,8 +17,8 @@ function checkLogIn(user, passw) {
 
 checkLogIn(namn, lösenord);
 
-/* Skapar en function som ska utföra hämtningen av inputs + utföra inloggingen,
- samt sparande i localStorage till slut */
+/*  Skapar click-funktion för inloggningsknappen som ska utföra hämtningen av 
+    inputs + utföra inloggingen, samt sparande i localStorage till slut */
 logInBtn.addEventListener("click", function(){
     if(username.value == namn && password.value == lösenord) {
         localStorage.setItem(username.value, password.value);
@@ -36,31 +35,31 @@ function logIn(user) {
     if (user == true) {
         logInDiv.style.display = "none";
         const welcome = document.createElement("p")
-        welcome.innerText = ('Hej "' + namn + '" välkommen in i värmen!');
+        welcome.innerText = ('Hi there ' + namn + '! "Välkommen in i värmen" as we say in sweden.');
         meny.appendChild(welcome);
         logOut();
     }
     else {
         logInDiv.style.display = "none";
-        const wrong = document.createElement("p")
-        wrong.innerText = "Du har tyvärr skrivit fel användarnamn eller lösenord!";
+        const wrong = document.createElement("p");
+        wrong.innerText = "Wrong username and/or password!";
         meny.appendChild(wrong);
         tryAgain();
     }
 }
 
-/* Funktion för utloggning som ska ta en till inloggningssidan när man klickar på knappen,
-    samt så ska localStorage rensas när man loggas ut */
+/*  Funktion för utloggning som tar en tillbaka till inloggningssidan när man klickar 
+    på knappen, samt så ska localStorage rensas när man loggas ut */
 function logOut() {
     const logOutBtn = document.createElement("button");
-    logOutBtn.innerText = "Log out";
+    logOutBtn.innerText = "Logout";
     meny.appendChild(logOutBtn);
     logOutBtn.addEventListener("click", function() {
         localStorage.removeItem(namn);
         logInDiv.style.display = "block";
         username.value = "";
         password.value = "";
-        const welcome = document.querySelector("p")
+        const welcome = document.querySelector("p");
         deleteElement(welcome);
         deleteElement(logOutBtn);
     });
@@ -84,3 +83,4 @@ function tryAgain() {
 function deleteElement (elm) {
     elm.parentNode.removeChild(elm);
 }
+
