@@ -7,6 +7,14 @@ const username = document.querySelector("#username");
 const password = document.querySelector("#password");
 const logInBtn = document.querySelector("#logInBtn");
 
+
+/*  Om användaren redan har loggat in och inte loggat ut igen så går man automatiskt
+    till Välkomstsidan */
+    
+if (localStorage.getItem("test") == "1234") {
+    logIn(true);
+} 
+
 /* Skapar en function som ska utföra hämtningen av inputs + utföra inloggingen,
  samt sparande i localStorage till slut */
 logInBtn.addEventListener("click", function(){
