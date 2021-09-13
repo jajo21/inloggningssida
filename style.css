@@ -1,3 +1,14 @@
 body, button {
     font-family: verdana;
 }
+h3 {
+    background-color: black;
+    color:white;
+}
+.meny {
+    text-align: center;
+    border: 2px solid white;
+    width: 300px;  
+    margin: auto;
+    box-shadow: 7px 7px 6px 6px #888888;
+}
