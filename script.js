@@ -33,16 +33,22 @@ logInBtn.addEventListener("click", function(){
     false så skapas ett felmeddelande och man får en knapp som säger försök igen. */
 function logIn(user) {
     if (user == true) {
-        logInDiv.style.display = "none";
-        const welcome = document.createElement("p")
+        logInDiv.parentNode.removeChild(logInDiv);
+        const welcomeHeader = document.createElement("h3");
+        welcomeHeader.innerText = "Welcome";
+        const welcome = document.createElement("p");
         welcome.innerText = ('Hi there ' + namn + '! "Välkommen in i värmen" as we say in sweden.');
+        meny.appendChild(welcomeHeader);
         meny.appendChild(welcome);
         logOut();
     }
     else {
-        logInDiv.style.display = "none";
+        logInDiv.parentNode.removeChild(logInDiv); 
+        const wrongHeader = document.createElement("h3");
+        wrongHeader.innerText = "Something went wrong";
         const wrong = document.createElement("p");
         wrong.innerText = "Wrong username and/or password!";
+        meny.appendChild(wrongHeader);
         meny.appendChild(wrong);
         tryAgain();
     }
@@ -56,12 +62,14 @@ function logOut() {
     meny.appendChild(logOutBtn);
     logOutBtn.addEventListener("click", function() {
         localStorage.removeItem(namn);
-        logInDiv.style.display = "block";
         username.value = "";
         password.value = "";
+        const welcomeHeader = document.querySelector("h3");
         const welcome = document.querySelector("p");
+        deleteElement(welcomeHeader);
         deleteElement(welcome);
         deleteElement(logOutBtn);
+        meny.appendChild(logInDiv);
     });
 }
 
@@ -72,10 +80,12 @@ function tryAgain() {
     tryAgainBtn.innerText = "Try again";
     meny.appendChild(tryAgainBtn);
     tryAgainBtn.addEventListener("click", function() {
-        logInDiv.style.display = "block";
+        const wrongHeader = document.querySelector("h3");
         const wrong = document.querySelector("p")
+        deleteElement(wrongHeader);
         deleteElement(wrong);
-        deleteElement(tryAgainBtn); 
+        deleteElement(tryAgainBtn);
+        meny.appendChild(logInDiv); 
     })
 }
 
@@ -83,4 +93,5 @@ function tryAgain() {
 function deleteElement (elm) {
     elm.parentNode.removeChild(elm);
 }
+
 
