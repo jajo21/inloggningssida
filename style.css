@@ -1,11 +1,33 @@
 body, button {
     font-family: verdana;
 }
+body {
+    background-color: rgb(227, 248, 255);
+}
+button {
+    border-radius: 20px;
+    margin-bottom: 5px;
+    background-color:black;
+    color: white;
+    border: 3px solid black;
+    transition: 0.2s;
+}
+button:hover {
+    background-color: rgb(88, 88, 88);
+    cursor: pointer;
+    border: 3px solid black;
+    transition: 0.2s;
+}
+input {
+    margin-bottom: 6px;
+    width: 125px;
+}
 h3 {
     background-color: black;
     color:white;
 }
 .meny {
+    background-color: white;
     text-align: center;
     border: 2px solid white;
     width: 300px;  
