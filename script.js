@@ -10,9 +10,13 @@ const logInBtn = document.querySelector("#logInBtn");
 
 /*  Om användaren redan har loggat in och inte loggat ut igen så går man automatiskt
     till Välkomstsidan */  
-if (localStorage.getItem(namn) == lösenord) {
-    logIn(true);
-} 
+function checkLogIn(user, passw) {
+    if (localStorage.getItem(user) == passw) {
+        logIn(true);
+    } 
+}
+
+checkLogIn(namn, lösenord);
 
 /* Skapar en function som ska utföra hämtningen av inputs + utföra inloggingen,
  samt sparande i localStorage till slut */
