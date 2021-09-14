@@ -17,8 +17,8 @@ function checkLogIn(user, passw) {
 
 checkLogIn(namn, lösenord);
 
-/*  Skapar click-funktion för inloggningsknappen som ska utföra hämtningen av 
-    inputs + utföra inloggingen, samt sparande i localStorage till slut */
+/*  Skapar click-funktion för inloggningsknappen som hämtar inputs och jämför
+    med namn och lösenord för att logga in eller inte, sparas i localStorage om true */
 logInBtn.addEventListener("click", function(){
     if(username.value == namn && password.value == lösenord) {
         localStorage.setItem(username.value, password.value);
@@ -32,24 +32,21 @@ logInBtn.addEventListener("click", function(){
     om inputen är true så skapas en ny välkomstsida med utloggningsknapp. Om den är
     false så skapas ett felmeddelande och man får en knapp som säger försök igen. */
 function logIn(user) {
+    logInDiv.parentNode.removeChild(logInDiv);
+    const nextHeader = document.createElement("h3");
+    const nextPara = document.createElement("p");
     if (user == true) {
-        logInDiv.parentNode.removeChild(logInDiv);
-        const welcomeHeader = document.createElement("h3");
-        welcomeHeader.innerText = "Welcome";
-        const welcome = document.createElement("p");
-        welcome.innerText = ('Hi there ' + namn + '! "Välkommen in i värmen" as we say in sweden.');
-        meny.appendChild(welcomeHeader);
-        meny.appendChild(welcome);
+        nextHeader.innerText = "Welcome";
+        nextPara.innerText = ('Hi there ' + namn + '! "Välkommen in i värmen" as we say in sweden.');
+        meny.appendChild(nextHeader);
+        meny.appendChild(nextPara);
         logOut();
     }
     else {
-        logInDiv.parentNode.removeChild(logInDiv); 
-        const wrongHeader = document.createElement("h3");
-        wrongHeader.innerText = "Something went wrong";
-        const wrong = document.createElement("p");
-        wrong.innerText = "Wrong username and/or password!";
-        meny.appendChild(wrongHeader);
-        meny.appendChild(wrong);
+        nextHeader.innerText = "Something went wrong";
+        nextPara.innerText = "Wrong username and/or password!";
+        meny.appendChild(nextHeader);
+        meny.appendChild(nextPara);
         tryAgain();
     }
 }
@@ -93,5 +90,3 @@ function tryAgain() {
 function deleteElement (elm) {
     elm.parentNode.removeChild(elm);
 }
-
-
