@@ -15,10 +15,12 @@ function checkLogIn(user, passw) {
     } 
 }
 
+/*  Matar in namn och lösenord i funktionen för att kontrollera om vi är inloggade */
 checkLogIn(namn, lösenord);
 
-/*  Skapar click-funktion för inloggningsknappen som hämtar inputs och jämför
-    med namn och lösenord för att logga in eller inte, sparas i localStorage om true */
+/*  Skapar click-funktion för inloggningsknappen som hämtar input-värden och jämför
+    med namn och lösenord variablerna för att logga in eller inte, sparas i localStorage 
+    om true */
 logInBtn.addEventListener("click", function(){
     if(username.value == namn && password.value == lösenord) {
         localStorage.setItem(username.value, password.value);
@@ -29,8 +31,9 @@ logInBtn.addEventListener("click", function(){
 });
 
 /*  Funktion för vart man ska hamna när man har skrivit in användarnamn och lösenord.
-    om inputen är true så skapas en ny välkomstsida med utloggningsknapp. Om den är
-    false så skapas ett felmeddelande och man får en knapp som säger försök igen. */
+    Om inputen är true, alltså rätt lösenord och användarnamn så skapas en ny välkomstsida 
+    med utloggningsknapp. Om den är false och fel uppgifter matats in så skapas en 
+    felmeddelande-sida och man får en knapp som säger försök igen. */
 function logIn(user) {
     logInDiv.parentNode.removeChild(logInDiv);
     const nextHeader = document.createElement("h3");
@@ -51,8 +54,9 @@ function logIn(user) {
     }
 }
 
-/*  Funktion för utloggning som tar en tillbaka till inloggningssidan när man klickar 
-    på knappen, samt så ska localStorage rensas när man loggas ut */
+/*  Funktion för utloggning - skapar en knapp som vid klick raderar alla element som inte 
+    ska finnas på startsidan och återskapar logInDiv som är startsidan/inloggningssidan. 
+    När man väljer att logga ut så rensas även localStorage och inputfälten */
 function logOut() {
     const logOutBtn = document.createElement("button");
     logOutBtn.innerText = "Logout";
@@ -70,8 +74,9 @@ function logOut() {
     });
 }
 
-/*  Funktion för när man skriver in fel användarnamn och lösenord så ska man trycka på en 
-    knapp för att komma tillbaka till startsidan */
+/*  Funktion för "försök igen knapp", när användaren skriver in fel användarnamn och 
+    lösen - skapar en knapp som vid klick raderar elementen på sidan och återskapar 
+    logInDiv som är startsidan/inloggningssidan  */
 function tryAgain() {
     const tryAgainBtn = document.createElement("button");
     tryAgainBtn.innerText = "Try again";
