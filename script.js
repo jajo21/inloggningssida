@@ -1,37 +1,37 @@
-const namn = "test";
-const lösenord = "1234";
+const username = "test";
+const password = "1234";
 
-const meny = document.querySelector(".meny");
+const menu = document.querySelector(".menu");
 const logInDiv = document.querySelector("#logIn")
-const username = document.querySelector("#username");
-const password = document.querySelector("#password");
+const userInput = document.querySelector("#userInput");
+const passInput = document.querySelector("#passInput");
 const logInBtn = document.querySelector("#logInBtn");
 
 /*  Om användaren redan har loggat in och inte loggat ut igen så kommer man 
     automatiskt till välkomstsidan */  
-function checkLogIn(user, passw) {
-    if (localStorage.getItem(user) == passw) {
+function checkLogIn(userIdCheck, userCheck) {
+    if (localStorage.getItem(userIdCheck) == userCheck) {
         logIn(true);
     } 
 }
 
-/*  Matar in namn och lösenord i funktionen för att kontrollera om vi är inloggade */
-checkLogIn(namn, lösenord);
+/*  Matar in username och password i funktionen för att kontrollera om vi är inloggade */
+checkLogIn("userId", username);
 
 /*  Skapar click-funktion för inloggningsknappen som hämtar input-värden och jämför
-    med namn och lösenord variablerna för att logga in eller inte, sparas i localStorage 
+    med username och password variablerna för att logga in eller inte, sparas i localStorage 
     om true */
 logInBtn.addEventListener("click", function(){
-    if(username.value == namn && password.value == lösenord) {
-        localStorage.setItem(username.value, password.value);
+    if(userInput.value == username && passInput.value == password) {
+        localStorage.setItem("userId", userInput.value );
         logIn(true);
     } else {
         logIn(false);
     }
 });
 
-/*  Funktion för vart man ska hamna när man har skrivit in användarnamn och lösenord.
-    Om inputen är true, alltså rätt lösenord och användarnamn så skapas en ny välkomstsida 
+/*  Funktion för vart man ska hamna när man har skrivit in användarusername och password.
+    Om inputen är true, alltså rätt password och användarusername så skapas en ny välkomstsida 
     med utloggningsknapp. Om den är false och fel uppgifter matats in så skapas en 
     felmeddelande-sida och man får en knapp som säger försök igen. */
 function logIn(user) {
@@ -40,16 +40,16 @@ function logIn(user) {
     const nextPara = document.createElement("p");
     if (user == true) {
         nextHeader.innerText = "Welcome";
-        nextPara.innerText = ('Hi there ' + namn + '! "Välkommen in i värmen" as we say in sweden.');
-        meny.appendChild(nextHeader);
-        meny.appendChild(nextPara);
+        nextPara.innerText = ('Hi there ' + username + '! "Välkommen in i värmen" as we say in sweden.');
+        menu.appendChild(nextHeader);
+        menu.appendChild(nextPara);
         logOut();
     }
     else {
         nextHeader.innerText = "Something went wrong";
         nextPara.innerText = "Wrong username and/or password!";
-        meny.appendChild(nextHeader);
-        meny.appendChild(nextPara);
+        menu.appendChild(nextHeader);
+        menu.appendChild(nextPara);
         tryAgain();
     }
 }
@@ -60,34 +60,34 @@ function logIn(user) {
 function logOut() {
     const logOutBtn = document.createElement("button");
     logOutBtn.innerText = "Logout";
-    meny.appendChild(logOutBtn);
+    menu.appendChild(logOutBtn);
     logOutBtn.addEventListener("click", function() {
-        localStorage.removeItem(namn);
-        username.value = "";
-        password.value = "";
+        localStorage.removeItem("userId");
+        userInput.value = "";
+        passInput.value = "";
         const welcomeHeader = document.querySelector("h3");
         const welcome = document.querySelector("p");
         deleteElement(welcomeHeader);
         deleteElement(welcome);
         deleteElement(logOutBtn);
-        meny.appendChild(logInDiv);
+        menu.appendChild(logInDiv);
     });
 }
 
-/*  Funktion för "försök igen knapp", när användaren skriver in fel användarnamn och 
+/*  Funktion för "försök igen knapp", när användaren skriver in fel användarusername och 
     lösen - skapar en knapp som vid klick raderar elementen på sidan och återskapar 
     logInDiv som är startsidan/inloggningssidan  */
 function tryAgain() {
     const tryAgainBtn = document.createElement("button");
     tryAgainBtn.innerText = "Try again";
-    meny.appendChild(tryAgainBtn);
+    menu.appendChild(tryAgainBtn);
     tryAgainBtn.addEventListener("click", function() {
         const wrongHeader = document.querySelector("h3");
         const wrong = document.querySelector("p")
         deleteElement(wrongHeader);
         deleteElement(wrong);
         deleteElement(tryAgainBtn);
-        meny.appendChild(logInDiv); 
+        menu.appendChild(logInDiv); 
     })
 }
 
