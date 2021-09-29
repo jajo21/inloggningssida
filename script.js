@@ -1,5 +1,6 @@
 const username = "test";
 const password = "1234";
+const userId = "userId";
 
 const menu = document.querySelector(".menu");
 const logInDiv = document.querySelector("#logIn")
@@ -16,14 +17,14 @@ function checkLogIn(userIdCheck, userCheck) {
 }
 
 /*  Matar in username och password i funktionen för att kontrollera om vi är inloggade */
-checkLogIn("userId", username);
+checkLogIn(userId, username);
 
 /*  Skapar click-funktion för inloggningsknappen som hämtar input-värden och jämför
     med username och password variablerna för att logga in eller inte, sparas i localStorage 
     om true */
 logInBtn.addEventListener("click", function(){
     if(userInput.value == username && passInput.value == password) {
-        localStorage.setItem("userId", userInput.value );
+        localStorage.setItem(userId, userInput.value );
         logIn(true);
     } else {
         logIn(false);
@@ -62,7 +63,7 @@ function logOut() {
     logOutBtn.innerText = "Logout";
     menu.appendChild(logOutBtn);
     logOutBtn.addEventListener("click", function() {
-        localStorage.removeItem("userId");
+        localStorage.removeItem(userId);
         userInput.value = "";
         passInput.value = "";
         const welcomeHeader = document.querySelector("h3");
