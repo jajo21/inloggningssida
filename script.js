@@ -21,11 +21,8 @@ function checkLogIn() {
 }
 checkLogIn();
 
-/*  Matar in username och password i funktionen för att kontrollera om vi är inloggade */
-//checkLogIn(userId, usersData[localStorage.getItem(userId)].userName);
-
 /*  Skapar click-funktion för inloggningsknappen som hämtar input-värden och jämför
-    med username och password variablerna för att logga in eller inte, sparas i localStorage 
+    med json fil för att logga in eller inte, sparas i localStorage 
     om true */
 logInBtn.addEventListener("click", async function () {
     const usersData = await getData("users.json");
@@ -43,8 +40,8 @@ logInBtn.addEventListener("click", async function () {
     }
 });
 
-/*  Funktion för vart man ska hamna när man har skrivit in användarusername och password.
-    Om inputen är true, alltså rätt password och användarusername så skapas en ny välkomstsida 
+/*  Funktion för vart man ska hamna när man har skrivit in username och password.
+    Om inputen är true, alltså rätt password och username så skapas en ny välkomstsida 
     med utloggningsknapp. Om den är false och fel uppgifter matats in så skapas en 
     felmeddelande-sida och man får en knapp som säger försök igen. */
 async function logIn(user) {
@@ -52,7 +49,7 @@ async function logIn(user) {
     logInDiv.parentNode.removeChild(logInDiv);
     const nextHeader = document.createElement("h3");
     const nextPara = document.createElement("p");
-    if (user == true) {
+    if (user) {
         nextHeader.innerText = "Welcome";
         nextPara.innerText = ('Hi there ' + usersData[localStorage.getItem(userId)].userName + '! "Välkommen in i värmen" as we say in sweden.');
         menu.appendChild(nextHeader);
@@ -109,4 +106,3 @@ function tryAgain() {
 function deleteElement(elm) {
     elm.parentNode.removeChild(elm);
 }
-
