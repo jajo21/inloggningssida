@@ -1,0 +1,20 @@
+[
+    {
+        "userId": "0",
+        "userName": "Johannes Jakobsson",
+        "userLogin": "johannes",
+        "userPassword": "jj"
+    },
+    {
+        "userId": "1",
+        "userName": "Test 1234",
+        "userLogin": "test",
+        "userPassword": "1234"
+    },
+    {
+        "userId": "2",
+        "userName": "Elsa Vahlgren",
+        "userLogin": "elsa",
+        "userPassword": "ev"
+    }
+]
