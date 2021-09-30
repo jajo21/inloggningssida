@@ -1,5 +1,3 @@
-const username = "test";
-const password = "1234";
 const userId = "userId";
 
 const menu = document.querySelector(".menu");
@@ -8,25 +6,39 @@ const userInput = document.querySelector("#userInput");
 const passInput = document.querySelector("#passInput");
 const logInBtn = document.querySelector("#logInBtn");
 
-/*  Om användaren redan har loggat in och inte loggat ut igen så kommer man 
-    automatiskt till välkomstsidan */  
-function checkLogIn(userIdCheck, userCheck) {
-    if (localStorage.getItem(userIdCheck) == userCheck) {
-        logIn(true);
-    } 
+/*  Funktion för att hämta data från fil eller url */
+const getData = async (url) => {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
 }
+/*  Om användaren redan har loggat in och inte loggat ut igen så kommer man 
+    automatiskt till välkomstsidan */
+function checkLogIn() {
+    if (localStorage.getItem(userId) !== null) {
+        logIn(true);
+    }
+}
+checkLogIn();
 
 /*  Matar in username och password i funktionen för att kontrollera om vi är inloggade */
-checkLogIn(userId, username);
+//checkLogIn(userId, usersData[localStorage.getItem(userId)].userName);
 
 /*  Skapar click-funktion för inloggningsknappen som hämtar input-värden och jämför
     med username och password variablerna för att logga in eller inte, sparas i localStorage 
     om true */
-logInBtn.addEventListener("click", function(){
-    if(userInput.value == username && passInput.value == password) {
-        localStorage.setItem(userId, userInput.value );
+logInBtn.addEventListener("click", async function () {
+    const usersData = await getData("users.json");
+
+    for (i = 0; i < usersData.length; i++) {
+        if (userInput.value == usersData[i].userLogin && passInput.value == usersData[i].userPassword) {
+            localStorage.setItem(userId, i);
+        }
+    }
+    if (localStorage.getItem("userId") !== null) {
         logIn(true);
-    } else {
+    }
+    else {
         logIn(false);
     }
 });
@@ -35,13 +47,14 @@ logInBtn.addEventListener("click", function(){
     Om inputen är true, alltså rätt password och användarusername så skapas en ny välkomstsida 
     med utloggningsknapp. Om den är false och fel uppgifter matats in så skapas en 
     felmeddelande-sida och man får en knapp som säger försök igen. */
-function logIn(user) {
+async function logIn(user) {
+    const usersData = await getData("users.json");
     logInDiv.parentNode.removeChild(logInDiv);
     const nextHeader = document.createElement("h3");
     const nextPara = document.createElement("p");
     if (user == true) {
         nextHeader.innerText = "Welcome";
-        nextPara.innerText = ('Hi there ' + username + '! "Välkommen in i värmen" as we say in sweden.');
+        nextPara.innerText = ('Hi there ' + usersData[localStorage.getItem(userId)].userName + '! "Välkommen in i värmen" as we say in sweden.');
         menu.appendChild(nextHeader);
         menu.appendChild(nextPara);
         logOut();
@@ -62,7 +75,7 @@ function logOut() {
     const logOutBtn = document.createElement("button");
     logOutBtn.innerText = "Logout";
     menu.appendChild(logOutBtn);
-    logOutBtn.addEventListener("click", function() {
+    logOutBtn.addEventListener("click", function () {
         localStorage.removeItem(userId);
         userInput.value = "";
         passInput.value = "";
@@ -82,17 +95,18 @@ function tryAgain() {
     const tryAgainBtn = document.createElement("button");
     tryAgainBtn.innerText = "Try again";
     menu.appendChild(tryAgainBtn);
-    tryAgainBtn.addEventListener("click", function() {
+    tryAgainBtn.addEventListener("click", function () {
         const wrongHeader = document.querySelector("h3");
         const wrong = document.querySelector("p")
         deleteElement(wrongHeader);
         deleteElement(wrong);
         deleteElement(tryAgainBtn);
-        menu.appendChild(logInDiv); 
+        menu.appendChild(logInDiv);
     })
 }
 
 /*  Funktion för att ta bort element. */
-function deleteElement (elm) {
+function deleteElement(elm) {
     elm.parentNode.removeChild(elm);
 }
+
