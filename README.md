@@ -13,7 +13,7 @@
 * HTML
 * Javascript tillsammans med localstorage
 
-## Kravspecifikation:
+## Kravspecifikation
 * Sidan skall ha en meny som innehåller två stycken input-fält,  namn och lösenord, samt en knapp för att logga in.
 * Namn och lösenord skall vara hårdkodade variabler i ditt javascript och vara: namn = "test", lösenord = "1234".
 * Skriver du rätt namn och lösenord så skall du mötas av en ny sida som välkomnar dig till sidan.
