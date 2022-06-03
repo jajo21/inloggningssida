@@ -5,7 +5,7 @@
 3. Absolut enklaste steget är att öppna applikationen med VS-code och Live Server
 
 ## Syfte - YH-utbildning: Webbutvecklare .NET
-* Inlämningsuppgift i kursen Webbapplikation MVP
+* Inlämningsuppgift i kursen Webbapplikation MVP - September 2021
 * Beskrivning: Inloggningssida med fokus JavaScript och localStorage.
 * Resultat: 100/100 (VG)
 
