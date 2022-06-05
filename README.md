@@ -11,6 +11,7 @@
 
 ## Tekniker
 * HTML
+* CSS
 * Javascript tillsammans med localstorage
 
 ## Kravspecifikation
